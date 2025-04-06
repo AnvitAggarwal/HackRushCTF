@@ -18,3 +18,47 @@ Using an online MD5 hash decoder, I found out the string to be 12345678. I went 
 ```sh
 FLAG: HRCTF{@LW@Y$_U$3_$TR0N6_P@$$W0RD}
 ```
+
+### Forensics
+
+-__cant_fast_forward_security_01
+
+I opened the repository and found that it was a git repository. I understood that I would have to check just the commits made in the month of March.
+```sh
+git log --since="2025-03-01" --until="2025-03-31"
+```
+
+I found a commit that seemed promising.
+
+```sh
+commit a64c7cde789fb5e47f67081afb400cc23da2a8e4
+Author: Alex Bakon <akonradi@signal.org>
+Date:   Wed Mar 19 15:50:15 2025 -0400
+
+    Exclude root key from WebSocketRequestMessage
+```
+
+```sh
+git log -p a64c7cde789fb5e47f67081afb400cc23da2a8e4
+```
+And I found something like:
+
+```sh
+@@ -145,8 +145,7 @@ mod test {
+                 WebSocketRequestMessage {
+                     verb: Some("POST".to_string()),
+                     path: Some("/v1/verification/session".to_string()),
+-                    body: Some(b"{\"number\":\"+18005550101\",
+-                        \"root_key\": \"0adf1c39f4035d3acd7496f9ed9023e56573b239ce4631d4553f90428bbe1641\"}".into()),
++                    body: Some(b"{\"number\":\"+18005550101\"}".into()),
+                     headers: vec!["content-type: application/json".to_string()],
+                     id: Some(0),
+                 }
+
+```
+
+I found the root key.
+
+```sh
+FLAG: HRCTF{0adf1c39f4035d3acd7496f9ed9023e56573b239ce4631d4553f90428bbe1641}
+```
