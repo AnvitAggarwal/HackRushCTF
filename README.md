@@ -77,12 +77,53 @@ grep "root_key"
 
 I found some json files which had some root key. But, it showed incorrect when I submitted that. I used git status to see which files are different from the ones the current version. I found some strings that seemed promising but none of them worked. I couldn't solve this problem.
 
+- __Benedict_and_William__
+Searching on Google, I got to know that on DOS, lines end at \r\n while in Linux, only \n is used.
+```sh
+file Two_Gentlemen_of_Verona.txt
+```
+```sh
+ASCII text, with CRLF, LF line terminators
+```
+
+I got to know that CRLF means DOS line terminators and LF stands for Linux Terminators. I had to search a little bit on how to find out which lines ended with \r\n and which lines ended on \n. I found out that cat -v <file_name> convert all \r to ^M on Stack Overflow.
+Using this, I could only verify having lines written in Windows and didn't get the line numbers.
+
+On searching more, I found that 
+```sh
+awk '{ if (sub(/\r$/, "")) print NR }' filename
+```
+prints the line numbers ending with \r.
+
+I got the output as
+```
+641
+1324
+1510
+2080
+2164
+2310
+3009
+4158
+```
+
+```sh
+FLAG: HRCTF{0641_1324_1510_2080_2164_2310_3009_4158}
+```
+
 ### Stego
 
 - __legos_to_logos__
 I just had to do:
 ```sh
 xxd tech.png
+```
+![alt text](Screenshot from 2025-04-06 10-50-00.png)
+
+The flag was at the end and I just had to decode it from base64 to string.
+
+```sh
+FLAG HRCFT{H4CKRU$H_1$_C00L}
 ```
 
 
