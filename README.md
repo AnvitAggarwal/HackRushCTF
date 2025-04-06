@@ -21,7 +21,7 @@ FLAG: HRCTF{@LW@Y$_U$3_$TR0N6_P@$$W0RD}
 
 ### Forensics
 
--__cant_fast_forward_security_01
+-__cant_fast_forward_security_01__
 
 I opened the repository and found that it was a git repository. I understood that I would have to check just the commits made in the month of March.
 ```sh
@@ -62,3 +62,27 @@ I found the root key.
 ```sh
 FLAG: HRCTF{0adf1c39f4035d3acd7496f9ed9023e56573b239ce4631d4553f90428bbe1641}
 ```
+
+- __cant_fast_forward_security_02__
+
+In this one, I tried using:
+
+```sh
+grep "key"
+```
+
+```sh
+grep "root_key"
+```
+
+I found some json files which had some root key. But, it showed incorrect when I submitted that. I used git status to see which files are different from the ones the current version. I found some strings that seemed promising but none of them worked. I couldn't solve this problem.
+
+### Stego
+
+- __legos_to_logos__
+I just had to do:
+```sh
+xxd tech.png
+```
+
+
