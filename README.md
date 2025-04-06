@@ -118,7 +118,7 @@ I just had to do:
 ```sh
 xxd tech.png
 ```
-![alt text](Screenshot from 2025-04-06 10-50-00.png)
+![alt text](legos_to_logos_xxd.png)
 
 The flag was at the end and I just had to decode it from base64 to string.
 
