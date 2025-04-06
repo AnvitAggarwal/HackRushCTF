@@ -1,5 +1,7 @@
 # Cyber Security: HackRushCTF'25
 
+username: anvit26
+
 ### Misc
 
 - __Find me__
